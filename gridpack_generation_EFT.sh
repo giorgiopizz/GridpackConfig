@@ -123,7 +123,7 @@ make_gridpack () {
     
     MG_EXT=".tar.gz"
     MG=MG5_aMC_v2.6.5$MG_EXT
-    MGSOURCE=https://cms-project-generators.web.cern.ch/cms-project-generators/$MG
+    TARSOURCE=https://cms-project-generators.web.cern.ch/cms-project-generators
     
     MGBASEDIRORIG=$(echo ${MG%$MG_EXT} | tr "." "_")
     isscratchspace=0
@@ -170,19 +170,19 @@ make_gridpack () {
       #cp /home/gpizzati/MG5_aMC_v2.6.5_SMEFT_restrict.tar.gz .
       # MG_TAR=MG5_aMC_v2.6.5_SMEFT_restrict_b_tau.tar.gz
 
+      MGSOURCE=${TARSOURCE}/${MG}
+      wget --no-check-certificate ${MGSOURCE}
 
-      # EDIT PATH TO SMEFT TAR BELOW
-      cp /home/gpizzati/$MG .
+      #cp /home/gpizzati/$MG .
       tar xzf $MG
       rm $MG
       cd $MGBASEDIRORIG/models/
-
-      
       SMEFT=SMEFTsim_U35_MwScheme_UFO$MG_EXT
       SMEFTBASEDIRORIG=${SMEFT%$MG_EXT}
+      SMEFTSOURCE=${TARSOURCE}/${SMEFT}
+      wget --no-check-certificate ${SMEFTSOURCE}
 
-      # EDIT PATH TO SMEFT TAR BELOW
-      cp /home/gpizzati/$SMEFT .
+      #cp /home/gpizzati/$SMEFT .
       tar xzf $SMEFT
       rm $SMEFT
       cd ..;
